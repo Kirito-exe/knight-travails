@@ -1,0 +1,21 @@
+Lesson: Project Knight Travails
+Repo link: https://github.com/Kirito-exe/knight-travails/tree/main/script
+
+
+﻿till now, I have set up a BFS algo
+ for this project, and a function that basically 
+ takes a coordinates and generates all possible coordinates, 
+ which is then used by the BFS algo's queue to discover more 
+ nodes, until the node which we are supposed to reach is not achieved. 
+
+The question:
+The issue I am facing is thinking as to how do 
+I make my BFS algo such that it discovers the 
+shortest path. BFS explores nodes in the same level
+first if the said graph is unweighted(a knight's move 
+in chess is always equal in distance covered so I feel
+like the graph should be unweighted), SO unless there is
+   some kind of distinction between the nodes, BFS will always
+    search all the nodes (even if the said node is going away
+     from the goal), check it's children and keep doing it until
+      it reaches the goal, which turns out to be quite inefficient. 
