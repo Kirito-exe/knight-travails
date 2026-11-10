@@ -9,14 +9,15 @@ function knightMoves(start, end) {
     const dequeue = queue.shift();
     console.log(dequeue);
     if (end[0] === dequeue[0] && end[1] === dequeue[1]) break;
-    let queueToBePushed = edgeListGen(dequeue);
+    let queueToBePushed = edgeListGen(dequeue, end);
     for (let i of queueToBePushed) {
       if (!inclusion(i, visited)) {
         queue.push(i);
       }
     }
     visited.push(dequeue);
-    adjList.push([dequeue, ...edgeListGen(dequeue)]);
+    adjList.push([dequeue, ...edgeListGen(dequeue, end)]);
+    queue.sort((a, b) => a[2] - b[2]);
     // console.log(queue)
   }
   // console.log(adjList)
@@ -31,4 +32,4 @@ function inclusion(key, checkarr) {
   return false;
 }
 
-knightMoves([0, 0], [3, 3]);
+knightMoves([3, 3], [4, 3]);

@@ -19,3 +19,11 @@ like the graph should be unweighted), SO unless there is
     search all the nodes (even if the said node is going away
      from the goal), check it's children and keep doing it until
       it reaches the goal, which turns out to be quite inefficient. 
+
+
+I implemented the distance logic by giving each of these edges a weight which is
+distance from the end goal, then sort it according to the lowest one in every loop iteration,
+but the search still takes a lot of wrong turns, It seems that it's cuz it always chooses the
+closet square(as intended) but sometimes for the best path we need to move a bit away.
+
+is it okay to search abt how to find the shortest path using BFS.
