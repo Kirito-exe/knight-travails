@@ -15,10 +15,10 @@ shortest path. BFS explores nodes in the same level
 first if the said graph is unweighted(a knight's move 
 in chess is always equal in distance covered so I feel
 like the graph should be unweighted), SO unless there is
-   some kind of distinction between the nodes, BFS will always
-    search all the nodes (even if the said node is going away
-     from the goal), check it's children and keep doing it until
-      it reaches the goal, which turns out to be quite inefficient. 
+some kind of distinction between the nodes, BFS will always
+search all the nodes (even if the said node is going away
+from the goal), check it's children and keep doing it until
+it reaches the goal, which turns out to be quite inefficient. 
 
 
 I implemented the distance logic by giving each of these edges a weight which is
@@ -26,4 +26,9 @@ distance from the end goal, then sort it according to the lowest one in every lo
 but the search still takes a lot of wrong turns, It seems that it's cuz it always chooses the
 closet square(as intended) but sometimes for the best path we need to move a bit away.
 
-is it okay to search abt how to find the shortest path using BFS.
+
+is it okay to search abt how to find the shortest path using BFS? but since the assignment stated 
+to find the shortest path using the selected algo, I don't think I should search abt it
+
+
+(Archived file, i got the solution but I am keeping it for reflection purposes)

@@ -1,27 +1,44 @@
 import { edgeListGen } from "./edgelistGen.js";
+import { isSafeMove } from "./helpers.js";
 function knightMoves(start, end) {
   if (!Array.isArray(start) || !Array.isArray(end))
     throw new TypeError("start and end are not in an array");
-  const queue = [start];
+  if (!isSafeMove(start)) throw new RangeError("start value out of bounds");
+  if (!isSafeMove(end)) throw new RangeError("end value out of bounds");
+  let depthcount = 0;
+  const queue = [[...start, depthcount]];
   const visited = [];
-  const adjList = [];
+  const adjList = {};
+  let lastRes;
   while (queue.length !== 0) {
     const dequeue = queue.shift();
-    console.log(dequeue);
-    if (end[0] === dequeue[0] && end[1] === dequeue[1]) break;
-    let queueToBePushed = edgeListGen(dequeue, end);
+    if (end[0] === dequeue[0] && end[1] === dequeue[1]) {
+      lastRes = dequeue;
+      break;
+    }
+    let queueToBePushed = edgeListGen(dequeue);
     for (let i of queueToBePushed) {
       if (!inclusion(i, visited)) {
-        queue.push(i);
+        queue.push([...i, dequeue]);
       }
     }
     visited.push(dequeue);
-    adjList.push([dequeue, ...edgeListGen(dequeue, end)]);
-    queue.sort((a, b) => a[2] - b[2]);
-    // console.log(queue)
+    adjList[`${dequeue}`] = edgeListGen(dequeue);
   }
-  // console.log(adjList)
-  // console.log(visited)
+  function saveParents(curr = lastRes, parents = []) {
+    if (curr[2] === undefined) {
+      return parents;
+    }
+    let [x, y] = curr;
+    parents.push([x, y]);
+    return saveParents(curr[2], parents);
+  }
+  function printParents(arr = saveParents()) {
+    console.log(`You made it in ${arr.length - 1} moves. Check it out:`);
+    arr.reverse();
+    for (let i of arr) console.log(i);
+  }
+  printParents();
 }
 
 function inclusion(key, checkarr) {
@@ -32,4 +49,4 @@ function inclusion(key, checkarr) {
   return false;
 }
 
-knightMoves([3, 3], [4, 3]);
+knightMoves([0, 0], [3, 9]);
